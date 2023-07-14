@@ -1,0 +1,107 @@
+name: graphics-demo
+summary: Graphics demo applications (glxinfo, vkcube), using gaming-graphics-core22
+description: |
+  Graphics demo applications (glxinfo, vkcube), using gaming-graphics-core22.
+version: 0.1.0
+grade: stable
+confinement: strict
+architectures:
+  - build-on: amd64
+base: core22
+compression: lzo
+assumes:
+  - snapd2.55.4
+
+lint:
+  # Snapcraft's `ldd` lint can't handle 32-bit things,
+  # So just make it quiet and also make builds a surprising amount faster
+  ignore:
+    - library:
+        - lib/i386-linux-gnu/**
+        - usr/lib/i386-linux-gnu/**
+        - lib32/**
+        - usr/lib32/**
+
+layout:
+  /usr/share/libdrm:
+    bind: $SNAP/graphics/usr/share/libdrm
+  /usr/share/drirc.d:
+    bind: $SNAP/graphics/usr/share/drirc.d
+  /usr/share/glvnd/egl_vendor.d:
+    bind: $SNAP/graphics/usr/share/glvnd/egl_vendor.d
+  /usr/share/X11/xkb:
+    bind: $SNAP/usr/share/X11/xkb
+  /usr/lib/x86_64-linux-gnu/libvulkan_intel.so:
+    symlink: $SNAP/graphics/usr/lib/x86_64-linux-gnu/libvulkan_intel.so
+  /usr/lib/i386-linux-gnu/libvulkan_intel.so:
+    symlink: $SNAP/graphics/usr/lib/i386-linux-gnu/libvulkan_intel.so
+  /usr/lib/x86_64-linux-gnu/libvulkan_lvp.so:
+    symlink: $SNAP/graphics/usr/lib/x86_64-linux-gnu/libvulkan_lvp.so
+  /usr/lib/i386-linux-gnu/libvulkan_lvp.so:
+    symlink: $SNAP/graphics/usr/lib/i386-linux-gnu/libvulkan_lvp.so
+  /usr/lib/x86_64-linux-gnu/libvulkan_radeon.so:
+    symlink: $SNAP/graphics/usr/lib/x86_64-linux-gnu/libvulkan_radeon.so
+  /usr/lib/i386-linux-gnu/libvulkan_radeon.so:
+    symlink: $SNAP/graphics/usr/lib/i386-linux-gnu/libvulkan_radeon.so
+  /usr/lib/x86_64-linux-gnu/libxcb-dri3.so.0.0.0:
+    symlink: $SNAP/graphics/usr/lib/x86_64-linux-gnu/libxcb-dri3.so.0.0.0
+  /usr/lib/x86_64-linux-gnu/libxcb-dri3.so.0:
+    symlink: $SNAP/graphics/usr/lib/x86_64-linux-gnu/libxcb-dri3.so.0.0.0
+  /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0:
+    symlink: $SNAP/graphics/usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0
+  /usr/lib/x86_64-linux-gnu/libxcb.so:
+    symlink: $SNAP/graphics/usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0
+  /usr/lib/x86_64-linux-gnu/libxcb.so.1:
+    symlink: $SNAP/graphics/usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0
+  /etc/ld.so.cache:
+    bind-file: $SNAP_DATA/etc/ld.so.cache
+
+plugs:
+  gaming-mesa:
+    interface: content
+    target: $SNAP/graphics
+    default-provider: gaming-graphics-core22
+
+hooks:
+  configure:
+    plugs:
+      - opengl
+
+environment:
+  LD_LIBRARY_PATH: $SNAP/graphics/usr/lib/x86_64-linux-gnu:$SNAP/graphics/lib/i386-linux-gnu:$SNAP/graphics/usr/lib:$SNAP/usr/lib/i386-linux-gnu:$SNAP/lib/i386-linux-gnu:$SNAP/usr/lib/i386-linux-gnu/pulseaudio${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+  LIBGL_DRIVERS_PATH: $SNAP/graphics/usr/lib/i386-linux-gnu/dri:$SNAP/graphics/usr/lib/x86_64-linux-gnu/dri:${LIBGL_DRIVERS_PATH:+:$LIBGL_DRIVERS_PATH}
+
+parts:
+  launcher:
+    plugin: nil
+    source: ./src
+    override-build: |
+      mkdir -p $CRAFT_PART_INSTALL/bin
+      cp * $CRAFT_PART_INSTALL/bin/
+
+apps:
+  vulkaninfo:
+    command: bin/vulkaninfo
+    plugs:
+      - opengl
+      - x11
+      - desktop
+  vkcube:
+    command: bin/vkcube
+    plugs:
+      - opengl
+      - x11
+      - desktop
+  glxinfo:
+    command: bin/glxinfo
+    plugs:
+      - opengl
+      - x11
+      - desktop
+  glxgears:
+    command: bin/glxgears
+    plugs:
+      - opengl
+      - x11
+      - desktop
+
