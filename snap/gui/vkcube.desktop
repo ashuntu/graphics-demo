@@ -1,5 +1,5 @@
 [Desktop Entry]
 Name=vkcube
-Exec=vkcube
+Exec=graphics-demo.vkcube
 Type=Application
 Terminal=false
