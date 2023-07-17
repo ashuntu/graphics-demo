@@ -68,6 +68,7 @@ hooks:
 environment:
   LD_LIBRARY_PATH: $SNAP/graphics/usr/lib/x86_64-linux-gnu:$SNAP/graphics/lib/i386-linux-gnu:$SNAP/graphics/usr/lib:$SNAP/usr/lib/i386-linux-gnu:$SNAP/lib/i386-linux-gnu:$SNAP/usr/lib/i386-linux-gnu/pulseaudio${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
   LIBGL_DRIVERS_PATH: $SNAP/graphics/usr/lib/i386-linux-gnu/dri:$SNAP/graphics/usr/lib/x86_64-linux-gnu/dri:${LIBGL_DRIVERS_PATH:+:$LIBGL_DRIVERS_PATH}
+  VK_ICD_FILENAMES: /var/lib/snapd/lib/vulkan/icd.d/nvidia_icd.json:$SNAP/graphics/usr/share/vulkan/icd.d/radeon_icd.x86_64.json:$SNAP/graphics/usr/share/vulkan/icd.d/radeon_icd.i686.json:$SNAP/graphics/usr/share/vulkan/icd.d/intel_icd.x86_64.json:$SNAP/graphics/usr/share/vulkan/icd.d/intel_icd.i686.json
 
 parts:
   launcher:
