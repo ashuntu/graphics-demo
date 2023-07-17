@@ -1,5 +1,5 @@
 [Desktop Entry]
 Name=glxgears
-Exec=graphics-demo.glxgears
+Exec=gaming-graphics-test.glxgears
 Type=Application
 Terminal=false

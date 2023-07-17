@@ -1,7 +1,7 @@
-name: graphics-demo
-summary: Graphics demo applications (glxinfo, vkcube), using gaming-graphics-core22
+name: gaming-graphics-test
+summary: Graphics test applications (glxinfo, vkcube), using gaming-graphics-core22
 description: |
-  Graphics demo applications (glxinfo, vkcube), using gaming-graphics-core22.
+  Graphics test applications (glxinfo, vkcube), using gaming-graphics-core22.
 version: 0.1.0
 grade: stable
 confinement: strict

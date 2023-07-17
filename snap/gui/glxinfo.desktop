@@ -1,5 +1,5 @@
 [Desktop Entry]
 Name=glxinfo
-Exec=graphics-demo.glxinfo
+Exec=gaming-graphics-test.glxinfo
 Type=Application
 Terminal=true

@@ -1,5 +1,5 @@
 [Desktop Entry]
 Name=vulkaninfo
-Exec=graphics-demo.vulkaninfo
+Exec=gaming-graphics-test.vulkaninfo
 Type=Application
 Terminal=true
