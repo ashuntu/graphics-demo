@@ -53,8 +53,6 @@ layout:
     symlink: $SNAP/graphics/usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0
   /usr/lib/x86_64-linux-gnu/libxcb.so.1:
     symlink: $SNAP/graphics/usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0
-  /etc/ld.so.cache:
-    bind-file: $SNAP_DATA/etc/ld.so.cache
 
 plugs:
   gaming-mesa:
