@@ -1,4 +1,4 @@
-# graphics-demo
+# gaming-graphics-test
 
 Simple snap for glxgears, vkcube, glxinfo, and vulkaninfo utilizing the [gaming-graphics-core22 content snap][gaminggraphics].
 
@@ -8,10 +8,10 @@ Based largely on the [Steam snap](https://github.com/canonical/steam-snap).
 
 ### Connect
 
-Connect gaming-graphics-core22 to the graphics-demo snap with
+Connect gaming-graphics-core22 to the gaming-graphics-test snap with
 
 ```
-snap connect graphics-demo:gaming-mesa gaming-graphics-core22
+snap connect gaming-graphics-test:gaming-mesa gaming-graphics-core22
 ```
 
 ### Switch Channels
